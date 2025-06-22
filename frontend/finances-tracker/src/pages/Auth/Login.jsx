@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/inputs/Input";
@@ -10,7 +10,7 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
-// Function to validate email format
+  // Function to validate email format
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -18,12 +18,11 @@ const Login = () => {
       setError("Invalid email format");
       return;
     }
-    if(!password) {
+    if (!password) {
       setError("Password cannot be empty");
       return;
     }
     setError("");
-
   };
 
   return (
