@@ -1,0 +1,82 @@
+# Node modules (backend and frontend)
+node_modules/
+**/node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.*.local
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/
+out/
+tmp/
+temp/
+
+# IDEs/editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Coverage and test
+coverage/
+.nyc_output/
+jest-test-results.json
+
+# TypeScript
+*.tsbuildinfo
+
+# Parcel, Vite, Next.js, Nuxt, etc.
+.cache/
+.next/
+.nuxt/
+.vite/
+
+# Docker
+docker-compose.override.yml
+*.local.yml
+
+# Binaries
+*.exe
+*.out
+*.app
+*.dll
+
+# Misc
+*.log
+*.pid
+*.seed
+*.tgz
+
+# Git hooks (optional)
+.husky/
+
+*.exe
+*.test
+*.out
+# Yarn and npm lock files
+yarn.lock
+package-lock.json
+# pnpm lock file
+pnpm-lock.yaml 
+# Bower
+bower_components/
+# Coverage reports
+coverage/
+# Miscellaneous
+*.pid
+*.seed
+*.tgz
