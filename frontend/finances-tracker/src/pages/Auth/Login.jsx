@@ -27,12 +27,14 @@ const Login = () => {
 
   return (
     <AuthLayout>
+      {/* Login page component for user authentication */}
       <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center ">
         <h3 className="text-xl font-semibold text-black">welcome back </h3>
         <p className="text-xs text-slate-700 mt-[5px] mb-6">
           please enter your credentials
         </p>
 
+        {/* Form for user login */}
         <form onSubmit={handleLogin}>
           <Input
             value={email}
@@ -52,7 +54,7 @@ const Login = () => {
           {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
           <button
             type="submit"
-            className="w-full bg-violet-500 text-white py-2 rounded-md mt-4 hover:bg-violet-400 transition-colors"
+            className="w-full bg-blue-500 text-white py-2 rounded-md mt-4 hover:bg-blue-400 transition-colors"
           >
             Login
           </button>
@@ -60,7 +62,7 @@ const Login = () => {
           <p className="text-xs text-slate-700 mt-4">
             Don't have an account?
             <span
-              className="text-violet-500 cursor-pointer"
+              className="text-blue-500 cursor-pointer"
               onClick={() => navigate("/signup")}
             >
               Register

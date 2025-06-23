@@ -10,6 +10,7 @@ import Exspense from './pages/dashboard/Exspense'
 const App = () => {
   return (
     <div>
+      {/* Using BrowserRouter to handle routing in the application */}
       <Router>
         <Routes>
           <Route path="/" element={<Root />} />
@@ -30,7 +31,7 @@ export default App
 const Root = () => {
   //check if token is present in local storage
   const isAuthenticated = localStorage.getItem('token') ? true : false;
-  //redirect to login page if not authenticated otherwise redirect to login
+  //redirect to dashboard page if authenticated otherwise redirect to login
   return (
     <div>
       {isAuthenticated ? <Navigate to="/dashboard" /> : <Navigate to="/login" />}

@@ -8,6 +8,7 @@ const Input = ({ value, onChange, label, placeholder, type }) => {
   };
   return (
     <div>
+      {/* Input component for forms with label, placeholder, and toggleable password visibility */}
       <label className="text-[13px] text-slate-800">{label}</label>
       <div className="input-box">
         <input
@@ -17,6 +18,7 @@ const Input = ({ value, onChange, label, placeholder, type }) => {
           placeholder={placeholder}
           type={showPassword ? "text" : type}
         />
+        {/* Toggle password visibility icon */}
         {type === "password" && (
           <>
             {showPassword ? (

@@ -11,7 +11,7 @@ const signUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  // Function to validate email format
+  // Function to validate email format and handle sign-up logic
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -39,6 +39,7 @@ const signUp = () => {
   };
   return (
     <div>
+      {/* Sign-up page component for user registration */}
       <AuthLayout>
         <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center ">
           <h3 className="text-xl font-semibold text-black">
@@ -80,7 +81,7 @@ const signUp = () => {
 
             <button
               type="submit"
-              className="w-full bg-violet-500 text-white py-2 rounded-md mt-4 hover:bg-violet-400 transition-colors"
+              className="w-full bg-blue-500 text-white py-2 rounded-md mt-4 hover:bg-blue-400 transition-colors"
             >
               Sign Up
             </button>
@@ -88,7 +89,7 @@ const signUp = () => {
             <p className="text-xs text-slate-700 mt-4">
               Already have an account?
               <span
-                className="text-violet-500 cursor-pointer"
+                className="text-blue-500 cursor-pointer"
                 onClick={() => navigate("/login")}
               >
                 Login
