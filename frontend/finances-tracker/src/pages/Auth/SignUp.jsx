@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/inputs/Input";
 import { validateEmail } from "../../utils/helper";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPath";
+import { UserContext } from "../../context/UserContext";
 
-const signUp = () => {
+const SignUp = () => {
   const [fullName, setFullName] = useState("");
+
   const [email, setEmail] = useState("");
+
   const [password, setPassword] = useState("");
+
   const [confirmPassword, setConfirmPassword] = useState("");
+
   const [error, setError] = useState(null);
+
+  const { updateUser } = useContext(UserContext);
+
   const navigate = useNavigate();
+
   // Function to validate email format and handle sign-up logic
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -33,9 +44,28 @@ const signUp = () => {
     }
 
     setError("");
-    // Here you would typically handle the sign-up logic, such as making an API call
-    // For now, we'll just navigate to the login page
-    navigate("/login");
+
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.SIGNUP, {
+        fullName,
+        email,
+        password,
+      });
+
+      const { token, user } = response.data;
+      if (token) {
+        localStorage.setItem("token", token); // Store token in local storage
+        updateUser(user); // Update user context
+        navigate("/dashboard"); // Redirect to dashboard
+      }
+    } catch (error) {
+      if (error.response && error.response.data) {
+        setError(error.response.data.message || "An error occurred");
+      }
+      else {
+        setError("An unexpected error occurred");
+      }
+    }
   };
   return (
     <div>
@@ -102,4 +132,4 @@ const signUp = () => {
   );
 };
 
-export default signUp;
+export default SignUp;

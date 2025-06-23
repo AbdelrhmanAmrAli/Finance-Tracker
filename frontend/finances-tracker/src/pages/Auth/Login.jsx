@@ -1,4 +1,4 @@
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/inputs/Input";
@@ -11,10 +11,10 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-// Importing necessary hooks and components
-// useState for managing local state
+  // Importing necessary hooks and components
+  // useState for managing local state
 
-  const {updateUser} = useContext(UserContext);
+  const { updateUser } = useContext(UserContext);
 
   const navigate = useNavigate();
   // Function to validate email format
@@ -37,7 +37,7 @@ const Login = () => {
         email,
         password,
       });
-      const {token,user}=response.data;
+      const { token, user } = response.data;
 
       if (token) {
         localStorage.setItem("token", token); // Store token in local storage
@@ -46,9 +46,13 @@ const Login = () => {
         navigate("/dashboard");
       }
     } catch (err) {
-      setError(err.message);
+      console.error("Login error:", err);
+      if (err.response && err.response.data) {
+        setError(err.response.data.message || "Login failed");
+      } else {
+        setError("An unexpected error occurred");
+      }
     }
-
   };
 
   return (
