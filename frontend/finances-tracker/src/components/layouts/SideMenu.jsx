@@ -21,7 +21,7 @@ const SideMenu = ({ activeMenu }) => {
     navigate("/login", { replace: true });
   };
   return (
-    <div className="w-64 h-[calc(100vh - 64px)] bg-white border-r border-gray-200/50 p-5 sticky top-[61px] z-20">
+    <div className="w-64 h-screen sticky top-[61px] overflow-y-auto bg-white border-r border-gray-200/50 p-5 z-20">
       <h5 className="text-grey-950 font-medium leading-6 ">
         {user?.fullName || ""}
       </h5>

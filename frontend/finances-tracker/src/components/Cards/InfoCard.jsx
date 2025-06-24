@@ -1,19 +1,15 @@
 import React from "react";
 
-const InfoCard = ({ icon, label, value, color }) => {
-  return (
-    <div className="flex gap-6 bg-white p-6 rounded-2xl shadow-md shadow-grey-100 boarder boarder-gray-200/50">
-      <div
-        className={`w-14 h-14 flex items-center justify-center text-[26px] text-white ${color} rounded-full drop-shadow-xl`}
-      >
-        {icon}
-      </div>
-      <div>
-        <h6 className="">{label}</h6>
-        <span className="">${value}</span>
-      </div>
+const InfoCard = ({ icon, label, value, color }) => (
+  <div
+    className={`w-full max-w-sm mx-auto ${color} text-white rounded-lg shadow p-5 flex items-center space-x-4`}
+  >
+    <div className="text-3xl">{icon}</div>
+    <div className="flex flex-col">
+      <span className="text-sm">{label}</span>
+      <span className="text-xl font-semibold">{value}</span>
     </div>
-  );
-};
+  </div>
+);
 
 export default InfoCard;

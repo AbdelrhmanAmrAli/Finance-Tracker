@@ -10,46 +10,34 @@ import toast from "react-hot-toast";
 
 const Expense = () => {
   useUserAuth();
+
   const [expenseData, setExpenseData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [openDeleteAlert, setOpenDeleteALert] = useState({
-    show: false,
-    data: null,
-  });
   const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false);
 
-  // Get All Expense Details
+  // Fetch expenses
   const fetchExpenseDetails = async () => {
     if (loading) return;
     setLoading(true);
     try {
-      const response = await axiosInstance.get(`${API_PATHS.EXPENSE.GET_ALL}`);
-      if (response.data) {
-        setExpenseData(response.data);
-      }
-    } catch (error) {
-      console.log("Something went wrong. Please try again.", error);
+      const { data } = await axiosInstance.get(API_PATHS.EXPENSE.GET_ALL);
+      setExpenseData(data || []);
+    } catch (err) {
+      console.error("Failed to fetch expenses:", err);
+      toast.error("Error loading expenses");
     } finally {
       setLoading(false);
     }
   };
 
-  // Handle Add Expense
+  // Add new expense
   const handleAddExpense = async (expense) => {
     const { description, amount, date } = expense;
-    // Validation Checks
-    if (!description.trim()) {
-      toast.error("Description is required.");
-      return;
-    }
-    if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      toast.error("Amount should be a valid number greater than 0.");
-      return;
-    }
-    if (!date) {
-      toast.error("Date is required.");
-      return;
-    }
+    if (!description.trim()) return toast.error("Description is required");
+    if (!amount || Number(amount) <= 0)
+      return toast.error("Amount must be > 0");
+    if (!date) return toast.error("Date is required");
+
     try {
       await axiosInstance.post(API_PATHS.EXPENSE.ADD, {
         description,
@@ -57,35 +45,25 @@ const Expense = () => {
         date,
       });
       setOpenAddExpenseModal(false);
-      toast.success("Expense added successfully");
+      toast.success("Expense added");
       fetchExpenseDetails();
-    } catch (error) {
-      console.error(
-        "Error adding expense:",
-        error.response?.data?.message || error.message
-      );
+    } catch (err) {
+      toast.error(err.response?.data?.message || err.message);
     }
   };
 
-  // Delete Expense
-  const deleteExpense = async (id) => {};
-
   useEffect(() => {
     fetchExpenseDetails();
-    return () => {};
   }, []);
 
   return (
     <DashboardLayout activeMenu="Expense">
-      <div className="my-5 mx-auto">
-        <div className="grid grid-cols-1 gap-6">
-          <div className="">
-            <ExpenseOverview
-              transactions={expenseData}
-              onAddExpense={() => setOpenAddExpenseModal(true)}
-            />
-          </div>
-        </div>
+      <div className="max-w-4xl mx-auto my-6 px-4 space-y-6">
+        <ExpenseOverview
+          transactions={expenseData}
+          onAddExpense={() => setOpenAddExpenseModal(true)}
+          isLoading={loading}
+        />
 
         <Modal
           isOpen={openAddExpenseModal}
@@ -98,4 +76,5 @@ const Expense = () => {
     </DashboardLayout>
   );
 };
+
 export default Expense;

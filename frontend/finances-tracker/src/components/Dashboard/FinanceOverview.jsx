@@ -1,5 +1,5 @@
 import React from "react";
-import CustomPieChart from "../Charts/CustomPieChart"; 
+import CustomPieChart from "../Charts/CustomPieChart";
 
 const COLORS = ["blue", "#FA2C37", "green"];
 
@@ -11,9 +11,11 @@ const FinanceOverview = ({ balance, totalIncome, totalExpenses }) => {
   ];
 
   return (
-    <div className="card">
+    <div className="bg-white rounded-lg shadow transition-shadow hover:shadow-lg p-6 w-full max-w-md mx-auto">
       <div className="flex items-center justify-between mb-4">
-        <h5 className="text-lg font-semibold">Financial Overview</h5>
+        <h5 className="text-lg font-semibold text-gray-800">
+          Financial Overview
+        </h5>
       </div>
       <CustomPieChart
         data={balanceData}
@@ -22,6 +24,10 @@ const FinanceOverview = ({ balance, totalIncome, totalExpenses }) => {
         colors={COLORS}
         showTextAnchor
       />
+      <div className="mt-4 border-t pt-4 text-sm text-gray-600 flex justify-between">
+        <span>Total</span>
+        <span className="font-medium">${balance}</span>
+      </div>
     </div>
   );
 };

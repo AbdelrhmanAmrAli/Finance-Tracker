@@ -40,45 +40,37 @@ const Home = () => {
     return () => {};
   }, []);
 
-
   return (
     <DashboardLayout activeMenu="Dashboard">
-      <div className="my-5 mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="my-5 mx-auto p-4 max-w-7xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           <InfoCard
             icon={<IoMdCard />}
             label="Total Balance"
             value={addThousandsSeparator(dashboardData?.balance || 0)}
             color="bg-primary"
           />
-
           <InfoCard
             icon={<LuWalletMinimal />}
             label="Total Income"
             value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
             color="bg-green-500"
           />
-
           <InfoCard
             icon={<LuHandCoins />}
-            label="Total Expenses "
+            label="Total Expenses"
             value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
             color="bg-red-500"
           />
         </div>
 
-        <div>
+        <div className="mt-8 space-y-8">
           <RecentTransactions transactions={dashboardData?.lastTransactions} />
-
           <FinanceOverview
             balance={dashboardData?.balance || 0}
             totalIncome={dashboardData?.totalIncome || 0}
             totalExpenses={dashboardData?.totalExpenses || 0}
           />
-
-          {/* <ExpenseTransactions
-            transactions={expenseData?. || []}
-          /> */}
         </div>
       </div>
     </DashboardLayout>

@@ -1,8 +1,8 @@
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/inputs/Input";
-import { validateEmail } from "../../utils/helper";
+import { checkPassword, validateEmail } from "../../utils/helper";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPath";
 import { UserContext } from "../../context/UserContext";
@@ -34,10 +34,12 @@ const SignUp = () => {
       setError("Invalid email format");
       return;
     }
-    if (!password) {
-      setError("Password cannot be empty");
+    const result = checkPassword(password);
+    if (result) {
+      setError(result);
       return;
     }
+
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
@@ -61,8 +63,7 @@ const SignUp = () => {
     } catch (error) {
       if (error.response && error.response.data) {
         setError(error.response.data.message || "An error occurred");
-      }
-      else {
+      } else {
         setError("An unexpected error occurred");
       }
     }
@@ -71,15 +72,15 @@ const SignUp = () => {
     <div>
       {/* Sign-up page component for user registration */}
       <AuthLayout>
-        <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center ">
-          <h3 className="text-xl font-semibold text-black">
+        <div className="flex flex-col justify-center w-full lg:max-w-lg px-6 sm:px-12 py-12 mx-auto">
+          <h3 className="text-xl sm:text-2xl font-semibold text-black">
             Create an Account
           </h3>
-          <p className="text-xs text-slate-700 mt-[5px] mb-6">
+          <p className="text-xs sm:text-sm text-slate-700 mt-1 mb-6">
             Please enter your details to sign up
           </p>
 
-          <form onSubmit={handleSignUp}>
+          <form onSubmit={handleSignUp} className="space-y-4">
             <Input
               label="Full Name"
               placeholder="Abdo Amr"
@@ -109,17 +110,22 @@ const SignUp = () => {
               onChange={({ target: { value } }) => setConfirmPassword(value)}
             />
 
+            {error && (
+              <p className="text-red-500 text-xs sm:text-sm mt-1">{error}</p>
+            )}
+
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-md mt-4 hover:bg-blue-400 transition-colors"
+              className="w-full bg-blue-500 text-white py-2 rounded-md mt-2 
+                   hover:bg-blue-400 transition-colors text-sm sm:text-base"
             >
               Sign Up
             </button>
-            {error && <p className="text-red-500 text-xs mt-2">{error}</p>}
-            <p className="text-xs text-slate-700 mt-4">
+
+            <p className="text-xs sm:text-sm text-slate-700 mt-4 text-center">
               Already have an account?
               <span
-                className="text-blue-500 cursor-pointer"
+                className="text-blue-500 ml-1 cursor-pointer"
                 onClick={() => navigate("/login")}
               >
                 Login
