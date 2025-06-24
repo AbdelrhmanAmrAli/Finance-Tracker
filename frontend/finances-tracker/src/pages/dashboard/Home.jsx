@@ -8,6 +8,8 @@ import InfoCard from "../../components/Cards/InfoCard";
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 import { addThousandsSeparator } from "../../utils/helper";
+import RecentTransactions from "../../components/Dashboard/RecentTransactions";
+import FinanceOverview from "../../components/Dashboard/FinanceOverview";
 
 const Home = () => {
   useUserAuth();
@@ -60,6 +62,16 @@ const Home = () => {
             label="Total Expenses "
             value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
             color="bg-red-500"
+          />
+        </div>
+
+        <div>
+          <RecentTransactions transactions={dashboardData?.lastTransactions} />
+
+          <FinanceOverview
+            balance={dashboardData?.balance || 0}
+            totalIncome ={dashboardData?.totalIncome ||0}
+            totalExpenses ={dashboardData?.totalExpenses || 0}
           />
         </div>
       </div>
