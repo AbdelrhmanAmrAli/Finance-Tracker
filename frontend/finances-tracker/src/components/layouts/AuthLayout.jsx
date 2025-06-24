@@ -17,7 +17,7 @@ const AuthLayout = ({ children }) => {
           value="230,000"
           color="bg-primary"
         />
-        <img src={card2} className="lg:w-[90%] absolute bottom-10 " />
+        {/* <img src={card2} className="lg:w-[90%] absolute bottom-10 " /> */}
       </div>
     </div>
   );

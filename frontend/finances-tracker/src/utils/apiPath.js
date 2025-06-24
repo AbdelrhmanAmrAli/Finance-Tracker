@@ -11,12 +11,12 @@ export const API_PATHS = {
         GET_DATA: "api/v1/dashboard",
     },
     INCOME: {
-        GET_ALL: "api/v1/income",
+        GET_ALL: "api/v1/income/get",
         ADD: "api/v1/income/add",
         DELETE: "api/v1/income/delete",
     },
     EXPENSE: {
-        GET_ALL: "api/v1/expense",
+        GET_ALL: "api/v1/expense/get",
         ADD: "api/v1/expense/add",
         DELETE: "api/v1/expense/delete",
     },

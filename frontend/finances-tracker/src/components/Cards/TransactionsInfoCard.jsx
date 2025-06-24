@@ -1,5 +1,5 @@
 import React from 'react';
-import { LuUtensils, LuTrendingUp, LuTrendingDown, LuTrash } from 'react-icons/lu';
+import { LuCoins, LuTrendingUp, LuTrendingDown, LuTrash } from 'react-icons/lu';
 
 const TransactionInfoCard = ({
   title,
@@ -20,7 +20,7 @@ const TransactionInfoCard = ({
         {icon ? (
           <img src={icon} alt={title} className="w-6 h-6" />
         ) : (
-          <LuUtensils />
+          <LuCoins />
         )}
       </div>
 
