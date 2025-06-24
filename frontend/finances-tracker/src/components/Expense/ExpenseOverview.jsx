@@ -1,16 +1,16 @@
 import React from "react";
 import { LuPlus } from "react-icons/lu";
 
-const IncomeOverview = ({ transactions, onAddIncome }) => {
+const ExpenseOverview = ({ transactions, onAddExpense }) => {
   return (
     <div className=" card">
       <div className="flex items-center justify-between">
         <div className="">
-          <h5 className="text-lg">Add Income</h5>
+          <h5 className="text-lg">Add Expense</h5>
         </div>
-        <button className="add-btn" onClick={onAddIncome}>
+        <button className="add-btn" onClick={onAddExpense}>
           <LuPlus className="text-lg" />
-          Add Income
+          Add Expense
         </button>
       </div>
       <div className="mt-1"></div>
@@ -18,4 +18,4 @@ const IncomeOverview = ({ transactions, onAddIncome }) => {
   );
 };
 
-export default IncomeOverview;
+export default ExpenseOverview;
