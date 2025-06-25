@@ -1,5 +1,5 @@
 // Load environment variables from .env if available
-const BASE_URL_ENV = import.meta.env.REACT_APP_API_BASE_URL;
+const BASE_URL_ENV = import.meta.env.VITE_API_URL;
 export const BASE_URL = BASE_URL_ENV;
 
 // utils/apiPath.js
