@@ -1,6 +1,3 @@
-# Finance-Tracker
-a web application for managing personal finances.
-
 # 💰 Financial Tracker
 
 A full-stack application for tracking income, expenses, and currency conversions with user authentication.
