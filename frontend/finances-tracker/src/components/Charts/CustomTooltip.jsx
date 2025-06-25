@@ -1,7 +1,21 @@
 import React from "react";
 
-const CustomTooltip = ({ active, payload }) => {
+const CustomTooltip = ({ active, payload, currency = "USD", fxRate = 1 }) => {
   if (active && payload && payload.length) {
+    const usdFormatter = new Intl.NumberFormat(undefined, {
+      style: "currency",
+      currency: "USD",
+    });
+    const convFormatter = new Intl.NumberFormat(undefined, {
+      style: "currency",
+      currency,
+    });
+
+    const value = payload[0].value;
+    const formattedUSD = usdFormatter.format(value);
+    const formattedConv =
+      fxRate != null ? convFormatter.format(value * fxRate) : null;
+
     return (
       <div
         role="tooltip"
@@ -14,7 +28,11 @@ const CustomTooltip = ({ active, payload }) => {
         </p>
         <p className="text-sm text-gray-600">
           Amount:{" "}
-          <span className="font-medium text-gray-900">${payload[0].value}</span>
+          <span className="font-medium text-gray-900">
+            {formattedConv
+              ? `${formattedUSD} → ${formattedConv}`
+              : formattedUSD}
+          </span>
         </p>
       </div>
     );

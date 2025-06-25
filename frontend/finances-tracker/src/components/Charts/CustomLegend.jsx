@@ -7,15 +7,21 @@ const CustomLegend = ({ payload }) => (
     aria-label="Chart legend"
   >
     {payload.map((entry, index) => (
-      <div key={`legend-${index}`} className="flex items-center space-x-2">
+      <div key={index} className="flex items-center space-x-2">
         <div
           className="w-3 h-3 rounded-full flex-shrink-0"
           style={{ backgroundColor: entry.color }}
           aria-hidden="true"
         />
-        <span className="text-xs text-gray-700 font-medium">{entry.value}</span>
+        <span
+          className="text-xs text-gray-700 font-medium"
+          aria-label={`Legend: ${entry.value}`}
+        >
+          {entry.value}
+        </span>
       </div>
     ))}
   </div>
 );
+
 export default CustomLegend;

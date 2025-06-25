@@ -17,7 +17,21 @@ const CustomPieChart = ({
   totalAmount,
   colors,
   showTextAnchor,
+  currency = "USD",
+  fxRate = 1,
 }) => {
+  const usdFormatter = new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency: "USD",
+  });
+  const convFormatter = new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency,
+  });
+
+  const formatTotal = (val) => usdFormatter.format(val);
+  const formatConverted = (val) => convFormatter.format(val * fxRate);
+
   return (
     <ResponsiveContainer width="100%" height={380}>
       <PieChart>
@@ -31,8 +45,8 @@ const CustomPieChart = ({
           innerRadius={100}
           labelLine={false}
         >
-          {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+          {data.map((entry, i) => (
+            <Cell key={`cell-${i}`} fill={colors[i % colors.length]} />
           ))}
           {showTextAnchor && (
             <Label
@@ -51,7 +65,10 @@ const CustomPieChart = ({
                       fontSize="24"
                       fontWeight="600"
                     >
-                      {totalAmount}
+                      {formatTotal(totalAmount)}
+                    </tspan>
+                    <tspan x={cx} dy={24} fill="#333" fontSize="16">
+                      {formatConverted(totalAmount)}
                     </tspan>
                   </text>
                 );
@@ -60,7 +77,17 @@ const CustomPieChart = ({
           )}
         </Pie>
 
-        <Tooltip content={<CustomTooltip />} />
+        <Tooltip
+          content={<CustomTooltip currency={currency} fxRate={fxRate} />}
+          formatter={(value) => {
+            const num = Number(value);
+            if (!Number.isFinite(num)) return ["$0.00", currency];
+
+            const usd = usdFormatter.format(num);
+            const conv = convFormatter.format(num * fxRate);
+            return [`${usd} → ${conv}`, currency];
+          }}
+        />
 
         <Legend
           iconType="circle"
