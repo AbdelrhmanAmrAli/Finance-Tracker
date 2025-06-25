@@ -1,4 +1,4 @@
-import card2 from "../../assets/images/Card2";
+// import card2 from "../../assets/images/Card2";
 import { LuTrendingUpDown } from "react-icons/lu";
 
 const AuthLayout = ({ children }) => {
