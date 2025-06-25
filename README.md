@@ -2,8 +2,6 @@
 
 A full-stack application for tracking income, expenses, and currency conversions with user authentication.
 
-![App Screenshot](https://via.placeholder.com/800x400?text=Financial+Tracker+Screenshot)
-
 ## 🌟 Features
 - **User Authentication**: Secure JWT-based login/signup
 - **Financial Tracking**: Record income and expenses
@@ -29,7 +27,7 @@ A full-stack application for tracking income, expenses, and currency conversions
 ### Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/financial-tracker.git
+   git clone https://github.com/AbdelrhmanAmrAli/Finance-Tracker
    cd financial-tracker
 
 # Install backend dependencies
