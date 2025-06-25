@@ -70,6 +70,7 @@ const Home = () => {
             balance={dashboardData?.balance || 0}
             totalIncome={dashboardData?.totalIncome || 0}
             totalExpenses={dashboardData?.totalExpenses || 0}
+            monthlyData={dashboardData?.monthlySummary||0}
           />
         </div>
       </div>

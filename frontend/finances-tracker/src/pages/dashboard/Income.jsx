@@ -47,7 +47,7 @@ const Income = () => {
   }, []);
 
   return (
-    <DashboardLayout activeMenu="Income">
+    <DashboardLayout activeMenu="income">
       <div className="my-5 mx-auto max-w-4xl px-4">
         <IncomeOverview
           transactions={incomeData}
