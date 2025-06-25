@@ -20,5 +20,8 @@ export const API_PATHS = {
         ADD: "api/v1/expense/add",
         DELETE: "api/v1/expense/delete",
     },
-    
+    CONVERT: {
+        GET: "/api/v1/convert"
+    },
+
 };  
