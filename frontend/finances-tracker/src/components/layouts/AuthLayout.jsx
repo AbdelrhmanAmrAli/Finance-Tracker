@@ -1,4 +1,3 @@
-import card2 from "../../assets/images/Card2.png";
 import { LuTrendingUpDown } from "react-icons/lu";
 
 const AuthLayout = ({ children }) => {
@@ -20,11 +19,7 @@ const AuthLayout = ({ children }) => {
           value="230,000"
           color="bg-primary"
         />
-        <img
-          src={card2}
-          alt="Finance card"
-          className="hidden md:block lg:w-11/12 mt-auto"
-        />
+        <div className="hidden md:block lg:w-11/12 mt-auto bg-blue-100 h-32 rounded-lg"></div>
       </div>
     </div>
   );

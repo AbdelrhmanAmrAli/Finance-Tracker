@@ -1,6 +1,5 @@
 // Load environment variables from .env if available
-const BASE_URL_ENV = import.meta.env.VITE_API_URL;
-export const BASE_URL = BASE_URL_ENV;
+export const BASE_URL = import.meta.env.VITE_API_URL;
 
 // utils/apiPath.js
 export const API_PATHS = {
