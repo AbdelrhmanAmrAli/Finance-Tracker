@@ -80,3 +80,4 @@ coverage/
 *.pid
 *.seed
 *.tgz
+.vercel

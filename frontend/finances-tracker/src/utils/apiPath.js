@@ -1,4 +1,6 @@
-export const BASE_URL = "http://localhost:8000";
+// Load environment variables from .env if available
+const BASE_URL_ENV = import.meta.env.VITE_API_URL;
+export const BASE_URL = BASE_URL_ENV;
 
 // utils/apiPath.js
 export const API_PATHS = {
