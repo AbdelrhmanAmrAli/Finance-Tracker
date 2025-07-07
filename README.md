@@ -1,6 +1,7 @@
 # 💰 Financial Tracker
 
 A full-stack application for tracking income, expenses, and currency conversions with user authentication.
+# https://finances-tracker-seven.vercel.app/
 
 ## 🌟 Features
 - **User Authentication**: Secure JWT-based login/signup
