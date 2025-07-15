@@ -1,7 +1,8 @@
 import React from "react";
 import { LuCoins, LuTrendingUp, LuTrendingDown, LuTrash } from "react-icons/lu";
 
-const TransactionInfoCard = ({
+const TransactionsInfoCard = ({
+  id,
   title,
   icon,
   date,
@@ -15,7 +16,6 @@ const TransactionInfoCard = ({
   const amountStyles =
     type === "income" ? "bg-green-50 text-green-500" : "bg-red-50 text-red-500";
 
-  // Formatters for USD and selected currency
   const usdFormatter = new Intl.NumberFormat(undefined, {
     style: "currency",
     currency: "USD",
@@ -25,7 +25,6 @@ const TransactionInfoCard = ({
     currency,
   });
 
-  // Format amount display: show both USD and converted values
   const formattedUSD = usdFormatter.format(amount);
   const convertedValue = fxRate ? amount * fxRate : null;
   const formattedConv =
@@ -51,9 +50,9 @@ const TransactionInfoCard = ({
         </div>
 
         <div className="flex items-center gap-2">
-          {!hideDeleteBtn && (
+          {!hideDeleteBtn && onDelete && (
             <button
-              onClick={onDelete}
+              onClick={() => onDelete(id)}
               className="invisible group-hover:visible text-gray-400 hover:text-red-500 focus:outline-none"
               aria-label="Delete transaction"
             >
@@ -80,4 +79,4 @@ const TransactionInfoCard = ({
   );
 };
 
-export default TransactionInfoCard;
+export default TransactionsInfoCard;

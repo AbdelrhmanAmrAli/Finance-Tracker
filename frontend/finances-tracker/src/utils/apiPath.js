@@ -14,12 +14,12 @@ export const API_PATHS = {
     INCOME: {
         GET_ALL: "api/v1/income/get",
         ADD: "api/v1/income/add",
-        DELETE: "api/v1/income/delete",
+        DELETE: "api/v1/income",
     },
     EXPENSE: {
         GET_ALL: "api/v1/expense/get",
         ADD: "api/v1/expense/add",
-        DELETE: "api/v1/expense/delete",
+        DELETE: "api/v1/expense",
     },
     CONVERT: {
         GET: "/api/v1/convert"
