@@ -10,7 +10,7 @@ const ExpenseOverview = ({ transactions = [], onAddExpense, isLoading }) => {
         </h5>
         <button
           onClick={onAddExpense}
-          className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition-colors"
+          className="inline-flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded transition-colors"
           aria-label="Add Expense"
         >
           <LuPlus className="text-lg" />

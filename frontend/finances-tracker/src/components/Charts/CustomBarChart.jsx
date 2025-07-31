@@ -62,8 +62,8 @@ const CustomBarChart = ({ data, currency, fxRate }) => {
             content={<CustomTooltip fxRate={fxRate} currency={currency} />}
             wrapperStyle={{ outline: "none" }}
           />
-          <Bar dataKey="income" name="Income" fill="#37B24D" />
-          <Bar dataKey="expense" name="Expenses" fill="#FA2C37" />
+          <Bar dataKey="income" name="Income" fill="#22c55e" /> {/* Tailwind green-500 */}
+          <Bar dataKey="expense" name="Expenses" fill="#ef4444" /> {/* Tailwind red-500 */}
         </BarChart>
       </ResponsiveContainer>
     </div>

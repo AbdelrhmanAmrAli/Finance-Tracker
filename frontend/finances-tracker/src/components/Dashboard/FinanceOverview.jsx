@@ -2,7 +2,8 @@ import React from "react";
 import CustomPieChart from "../Charts/CustomPieChart";
 import CustomBarChart from "../Charts/CustomBarChart";
 
-const COLORS = ["blue", "#FA2C37", "#37B24D"];
+// Modern, accessible palette: blue for balance, red for expenses, green for income
+const COLORS = ["#2563eb", "#ef4444", "#22c55e"]; // Tailwind blue-600, red-500, green-500
 
 const FinanceOverview = ({
   balance,

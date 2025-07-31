@@ -69,34 +69,20 @@ const Home = () => {
 
   return (
     <DashboardLayout activeMenu="Dashboard">
-      <div className="my-5 mx-auto p-4 max-w-7xl space-y-8">
+      <div className="my-5 mx-auto p-4 max-w-7xl space-y-8 bg-bg-light text-gray-900">
         {loading ? (
           <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f0f4f8">
-            {/* Info Cards */}
+            {/* Skeleton loaders */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {Array.from({ length: 4 }).map((_, i) => (
                 <Skeleton key={i} height={120} />
               ))}
             </div>
-
-            {/* Currency selector placeholder */}
-            <div className="mt-6">
-              <Skeleton width={200} height={30} />
-            </div>
-
-            {/* Charts */}
-            <div className="mt-6">
-              <Skeleton height={300} />
-            </div>
-
-            {/* Recent transactions */}
+            <div className="mt-6"><Skeleton width={150} height={25} /></div>
+            <div className="mt-6"><Skeleton height={300} /></div>
             <div className="mt-6">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Skeleton
-                  key={i}
-                  height={60}
-                  style={{ marginBottom: "10px" }}
-                />
+                <Skeleton key={i} height={60} style={{ marginBottom: "10px" }} />
               ))}
             </div>
           </SkeletonTheme>
@@ -107,19 +93,19 @@ const Home = () => {
                 icon={<IoMdCard />}
                 label="Total Balance"
                 value={formatValue(dashboardData.balance)}
-                color="bg-primary"
+                color="bg-blue-600 text-white"
               />
               <InfoCard
                 icon={<LuWalletMinimal />}
                 label="Total Income"
                 value={formatValue(dashboardData.totalIncome)}
-                color="bg-green-500"
+                color="bg-green-500 text-white"
               />
               <InfoCard
                 icon={<LuHandCoins />}
                 label="Total Expenses"
                 value={formatValue(dashboardData.totalExpenses)}
-                color="bg-red-500"
+                color="bg-red-500 text-white"
               />
             </div>
 
@@ -131,15 +117,13 @@ const Home = () => {
                 id="currency"
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                className="border rounded p-2"
+                className="border border-accent rounded p-2"
               >
                 {["USD", "EUR"].map((c) => (
-                  <option key={c} value={c}>
-                    {c}
-                  </option>
+                  <option key={c} value={c}>{c}</option>
                 ))}
               </select>
-              {fxError && <p className="text-red-500">{fxError}</p>}
+              {fxError && <p className="text-danger">{fxError}</p>}
             </div>
 
             <FinanceOverview
