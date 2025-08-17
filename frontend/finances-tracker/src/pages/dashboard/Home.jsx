@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { lazy, Suspense, useMemo } from "react";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPath";
-import InfoCard from "../../components/Cards/InfoCard";
-import RecentTransactions from "../../components/Dashboard/RecentTransactions";
-import FinanceOverview from "../../components/Dashboard/FinanceOverview";
+const InfoCard = React.memo(lazy(() => import("../../components/Cards/InfoCard")));
+const RecentTransactions = React.memo(lazy(() => import("../../components/Dashboard/RecentTransactions")));
+const FinanceOverview = React.memo(lazy(() => import("../../components/Dashboard/FinanceOverview")));
 import { LuWalletMinimal, LuHandCoins } from "react-icons/lu";
 import { IoMdCard } from "react-icons/io";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
@@ -44,7 +45,7 @@ const Home = () => {
   const fetchFxRate = async (targetCurrency) => {
     try {
       const res = await axiosInstance.get(API_PATHS.CONVERT.GET, {
-        params: { pair: `USD${targetCurrency}`, amount: 1 },
+        params: { base: "USD", target: targetCurrency, amount: 1 },
       });
       setFxRate(res.data.rate);
     } catch (error) {
@@ -64,8 +65,9 @@ const Home = () => {
       : (setFxRate(1), setFxError(null));
   }, [currency]);
 
-  const formatValue = (value) =>
-    fxRate ? convFormatter.format(value * fxRate) : usdFormatter.format(value);
+  const formatValue = useMemo(() => {
+    return (value) => fxRate ? convFormatter.format(value * fxRate) : usdFormatter.format(value);
+  }, [fxRate, currency]);
 
   return (
     <DashboardLayout activeMenu="Dashboard">
@@ -88,26 +90,28 @@ const Home = () => {
           </SkeletonTheme>
         ) : (
           <>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              <InfoCard
-                icon={<IoMdCard />}
-                label="Total Balance"
-                value={formatValue(dashboardData.balance)}
-                color="bg-blue-600 text-white"
-              />
-              <InfoCard
-                icon={<LuWalletMinimal />}
-                label="Total Income"
-                value={formatValue(dashboardData.totalIncome)}
-                color="bg-green-500 text-white"
-              />
-              <InfoCard
-                icon={<LuHandCoins />}
-                label="Total Expenses"
-                value={formatValue(dashboardData.totalExpenses)}
-                color="bg-red-500 text-white"
-              />
-            </div>
+            <Suspense fallback={<Skeleton height={120} count={3} />}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <InfoCard
+                  icon={<IoMdCard />}
+                  label="Total Balance"
+                  value={formatValue(dashboardData.balance)}
+                  color="bg-blue-600 text-white"
+                />
+                <InfoCard
+                  icon={<LuWalletMinimal />}
+                  label="Total Income"
+                  value={formatValue(dashboardData.totalIncome)}
+                  color="bg-green-500 text-white"
+                />
+                <InfoCard
+                  icon={<LuHandCoins />}
+                  label="Total Expenses"
+                  value={formatValue(dashboardData.totalExpenses)}
+                  color="bg-red-500 text-white"
+                />
+              </div>
+            </Suspense>
 
             <div className="space-y-4">
               <label htmlFor="currency" className="block font-medium">
@@ -119,28 +123,32 @@ const Home = () => {
                 onChange={(e) => setCurrency(e.target.value)}
                 className="border border-accent rounded p-2"
               >
-                {["USD", "EUR"].map((c) => (
+                {["USD", "EUR", "EGP","GBP"].map((c) => (
                   <option key={c} value={c}>{c}</option>
                 ))}
               </select>
               {fxError && <p className="text-danger">{fxError}</p>}
             </div>
 
-            <FinanceOverview
-              balance={dashboardData.balance}
-              totalIncome={dashboardData.totalIncome}
-              totalExpenses={dashboardData.totalExpenses}
-              monthlyData={dashboardData.monthlySummary}
-              currency={currency}
-              fxRate={fxRate}
-            />
+            <Suspense fallback={<Skeleton height={300} />}>
+              <FinanceOverview
+                balance={dashboardData.balance}
+                totalIncome={dashboardData.totalIncome}
+                totalExpenses={dashboardData.totalExpenses}
+                monthlyData={dashboardData.monthlySummary}
+                currency={currency}
+                fxRate={fxRate}
+              />
+            </Suspense>
 
-            <RecentTransactions
-              transactions={dashboardData.lastTransactions}
-              refreshDashboard={fetchDashboardData}
-              currency={currency}
-              fxRate={fxRate}
-            />
+            <Suspense fallback={<Skeleton height={60} count={5} />}>
+              <RecentTransactions
+                transactions={dashboardData.lastTransactions}
+                refreshDashboard={fetchDashboardData}
+                currency={currency}
+                fxRate={fxRate}
+              />
+            </Suspense>
           </>
         )}
       </div>

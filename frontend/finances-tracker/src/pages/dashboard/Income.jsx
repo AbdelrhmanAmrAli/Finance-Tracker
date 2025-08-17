@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { lazy, Suspense, useMemo } from "react";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import { API_PATHS } from "../../utils/apiPath";
 import axiosInstance from "../../utils/axiosInstance";
-import IncomeOverview from "../../components/Income/IncomeOverview";
-import Modal from "../../components/Modal";
-import AddIncomeForm from "../../components/Income/AddIncomeForm";
-import TransactionInfoCard from "../../components/Cards/TransactionsInfoCard";
+const IncomeOverview = React.memo(lazy(() => import("../../components/Income/IncomeOverview")));
+const Modal = React.memo(lazy(() => import("../../components/Modal")));
+const AddIncomeForm = React.memo(lazy(() => import("../../components/Income/AddIncomeForm")));
+const TransactionInfoCard = React.memo(lazy(() => import("../../components/Cards/TransactionsInfoCard")));
+import { FixedSizeList as List } from "react-window";
 import toast from "react-hot-toast";
 
 const Income = () => {
@@ -35,7 +37,7 @@ const Income = () => {
   const fetchFxRate = async (targetCurrency) => {
     try {
       const res = await axiosInstance.get(API_PATHS.CONVERT.GET, {
-        params: { pair: `USD${targetCurrency}`, amount: 1 },
+        params: { base: "USD", target: targetCurrency, amount: 1 },
       });
       setFxRate(res.data.rate);
     } catch (error) {
@@ -82,9 +84,8 @@ const Income = () => {
       : (setFxRate(1), setFxError(null));
   }, [currency]);
 
-  const formatUSD = (val) => `$${Number(val).toLocaleString()}`;
-  const formatConverted = (val) =>
-    fxRate ? `${(val * fxRate).toFixed(2)} ${currency}` : "";
+  const formatUSD = useMemo(() => (val) => `$${Number(val).toLocaleString()}`, []);
+  const formatConverted = useMemo(() => (val) => fxRate ? `${(val * fxRate).toFixed(2)} ${currency}` : "", [fxRate, currency]);
 
   return (
     <DashboardLayout activeMenu="income">
@@ -102,7 +103,7 @@ const Income = () => {
             onChange={(e) => setCurrency(e.target.value)}
             className="border rounded p-2"
           >
-            {["USD", "EUR"].map((c) => (
+            {["USD", "EUR", "EGP"].map((c) => (
               <option key={c} value={c}>
                 {c}
               </option>
@@ -122,18 +123,29 @@ const Income = () => {
               No income recorded yet.
             </div>
           ) : (
-            incomeData.map((inc) => (
-              <TransactionInfoCard
-                key={inc._id}
-                title={inc.source}
-                date={inc.date.split("T")[0]}
-                amount={inc.amount}
-                type="income"
-                currency={currency}
-                fxRate={fxRate}
-                onDelete={() => handleDeleteIncome(inc._id)}
-              />
-            ))
+            <List
+              height={400}
+              itemCount={incomeData.length}
+              itemSize={80}
+              width={"100%"}
+            >
+              {({ index, style }) => {
+                const inc = incomeData[index];
+                return (
+                  <div style={style} key={inc._id}>
+                    <TransactionInfoCard
+                      title={inc.source}
+                      date={inc.date.split("T")[0]}
+                      amount={inc.amount}
+                      type="income"
+                      currency={currency}
+                      fxRate={fxRate}
+                      onDelete={() => handleDeleteIncome(inc._id)}
+                    />
+                  </div>
+                );
+              }}
+            </List>
           )}
         </div>
 

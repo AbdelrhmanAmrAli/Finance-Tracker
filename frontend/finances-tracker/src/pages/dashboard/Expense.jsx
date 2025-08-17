@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { lazy, Suspense, useMemo } from "react";
 import { useUserAuth } from "../../hooks/useUserAuth";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
 import { API_PATHS } from "../../utils/apiPath";
 import axiosInstance from "../../utils/axiosInstance";
-import ExpenseOverview from "../../components/Expense/ExpenseOverview";
-import Modal from "../../components/Modal";
-import AddExpenseForm from "../../components/Expense/AddExpenseForm";
-import TransactionInfoCard from "../../components/Cards/TransactionsInfoCard";
+const ExpenseOverview = React.memo(lazy(() => import("../../components/Expense/ExpenseOverview")));
+const Modal = React.memo(lazy(() => import("../../components/Modal")));
+const AddExpenseForm = React.memo(lazy(() => import("../../components/Expense/AddExpenseForm")));
+const TransactionInfoCard = React.memo(lazy(() => import("../../components/Cards/TransactionsInfoCard")));
+import { FixedSizeList as List } from "react-window";
 import toast from "react-hot-toast";
 
 const Expense = () => {
@@ -35,7 +37,7 @@ const Expense = () => {
   const fetchFxRate = async (targetCurrency) => {
     try {
       const res = await axiosInstance.get(API_PATHS.CONVERT.GET, {
-        params: { pair: `USD${targetCurrency}`, amount: 1 },
+        params: { base: "USD", target: targetCurrency, amount: 1 },
       });
       setFxRate(res.data.rate);
     } catch (error) {
@@ -86,9 +88,8 @@ const Expense = () => {
       : (setFxRate(1), setFxError(null));
   }, [currency]);
 
-  const formatUSD = (val) => `$${Number(val).toLocaleString()}`;
-  const formatConverted = (val) =>
-    fxRate ? `${(val * fxRate).toFixed(2)} ${currency}` : "";
+  const formatUSD = useMemo(() => (val) => `$${Number(val).toLocaleString()}`, []);
+  const formatConverted = useMemo(() => (val) => fxRate ? `${(val * fxRate).toFixed(2)} ${currency}` : "", [fxRate, currency]);
 
   return (
     <DashboardLayout activeMenu="Expense">
@@ -106,7 +107,7 @@ const Expense = () => {
             onChange={(e) => setCurrency(e.target.value)}
             className="border rounded p-2"
           >
-            {["USD", "EUR"].map((c) => (
+            {["USD", "EUR", "EGP"].map((c) => (
               <option key={c} value={c}>
                 {c}
               </option>
@@ -127,18 +128,29 @@ const Expense = () => {
           {expenseData.length === 0 ? (
             <div className="px-6 py-4 text-gray-500">No expenses yet.</div>
           ) : (
-            expenseData.map((exp) => (
-              <TransactionInfoCard
-                key={exp._id}
-                title={exp.description}
-                date={exp.date.split("T")[0]}
-                amount={exp.amount}
-                type="expense"
-                currency={currency}
-                fxRate={fxRate}
-                onDelete={() => handleDeleteExpense(exp._id)}
-              />
-            ))
+            <List
+              height={400}
+              itemCount={expenseData.length}
+              itemSize={80}
+              width={"100%"}
+            >
+              {({ index, style }) => {
+                const exp = expenseData[index];
+                return (
+                  <div style={style} key={exp._id}>
+                    <TransactionInfoCard
+                      title={exp.description}
+                      date={exp.date.split("T")[0]}
+                      amount={exp.amount}
+                      type="expense"
+                      currency={currency}
+                      fxRate={fxRate}
+                      onDelete={() => handleDeleteExpense(exp._id)}
+                    />
+                  </div>
+                );
+              }}
+            </List>
           )}
         </div>
 

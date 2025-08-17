@@ -1,15 +1,15 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-import Login from "./pages/Auth/Login";
-import SignUp from "./pages/Auth/SignUp";
-import Home from "./pages/dashboard/Home";
-import Income from "./pages/dashboard/Income";
-import Expense from "./pages/dashboard/Expense";
+const Login = lazy(() => import("./pages/Auth/Login"));
+const SignUp = lazy(() => import("./pages/Auth/SignUp"));
+const Home = lazy(() => import("./pages/dashboard/Home"));
+const Income = lazy(() => import("./pages/dashboard/Income"));
+const Expense = lazy(() => import("./pages/dashboard/Expense"));
 import UserProvider from "./context/UserContext";
 import{Toaster} from "react-hot-toast";
 
@@ -19,14 +19,16 @@ const App = () => {
       <div>
         {/* Using BrowserRouter to handle routing in the application */}
         <Router>
-          <Routes>
-            <Route path="/" element={<Root />} />
-            <Route path="/login" exact element={<Login />} />
-            <Route path="/signUp" exact element={<SignUp />} />
-            <Route path="/dashboard" exact element={<Home />} />
-            <Route path="/income" exact element={<Income />} />
-            <Route path="/expense" exact element={<Expense />} />
-          </Routes>
+          <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<Root />} />
+              <Route path="/login" exact element={<Login />} />
+              <Route path="/signUp" exact element={<SignUp />} />
+              <Route path="/dashboard" exact element={<Home />} />
+              <Route path="/income" exact element={<Income />} />
+              <Route path="/expense" exact element={<Expense />} />
+            </Routes>
+          </Suspense>
         </Router>
       </div>
       <Toaster
