@@ -34,8 +34,8 @@ const TransactionsInfoCard = ({
     : formattedUSD;
 
   return (
-    <div className="group relative flex items-center gap-4 mt-2 p-4 border rounded-lg bg-white hover:shadow transition-shadow">
-      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center text-xl bg-gray-100 rounded">
+    <div className="group relative flex items-center gap-4 mt-2 p-5 border border-accent/30 rounded-2xl bg-white hover:shadow-card transition-shadow font-display">
+      <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center text-2xl bg-bg-light rounded-xl">
         {icon ? (
           <img src={icon} alt={title} className="w-6 h-6" />
         ) : (
@@ -45,15 +45,15 @@ const TransactionsInfoCard = ({
 
       <div className="flex-1 flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-700">{title}</p>
-          <p className="text-xs text-gray-400 mt-1">{date}</p>
+          <p className="text-base font-semibold text-primary">{title}</p>
+          <p className="text-xs text-accent mt-1">{date}</p>
         </div>
 
         <div className="flex items-center gap-2">
           {!hideDeleteBtn && onDelete && (
             <button
               onClick={() => onDelete(id)}
-              className="invisible group-hover:visible text-gray-400 hover:text-red-500 focus:outline-none"
+              className="invisible group-hover:visible text-accent hover:text-danger focus:outline-none"
               aria-label="Delete transaction"
             >
               <LuTrash size={18} />
@@ -61,9 +61,9 @@ const TransactionsInfoCard = ({
           )}
 
           <div
-            className={`flex items-center gap-1 px-3 py-1.5 rounded ${amountStyles}`}
+            className={`flex items-center gap-1 px-3 py-1.5 rounded-xl ${amountStyles}`}
           >
-            <span className="text-xs font-medium">
+            <span className="text-xs font-bold">
               {type === "income" ? "+" : "-"}
               {displayAmount}
             </span>

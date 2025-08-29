@@ -1,3 +1,4 @@
+docs/
 # Node modules (backend and frontend)
 node_modules/
 **/node_modules/

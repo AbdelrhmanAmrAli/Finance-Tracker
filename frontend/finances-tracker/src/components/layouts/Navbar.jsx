@@ -7,9 +7,9 @@ const Navbar = ({ activeMenu }) => {
 
   return (
     <>
-      <div className="flex items-center gap-4 bg-white border-b border-gray-200/50 backdrop-blur-sm py-2 px-4 sticky top-0 z-30">
+      <div className="flex items-center gap-4 bg-white border-b border-accent/30 backdrop-blur-sm py-3 px-6 sticky top-0 z-30 shadow-sm">
         <button
-          className="block lg:hidden text-black p-2"
+          className="block lg:hidden text-primary p-2 rounded hover:bg-primary/10 focus:outline-none"
           onClick={() => setOpenSideMenu((prev) => !prev)}
           aria-label="Toggle menu"
         >
@@ -20,7 +20,7 @@ const Navbar = ({ activeMenu }) => {
           )}
         </button>
 
-        <h2 className="text-lg font-medium text-black">Finance Tracker</h2>
+        <h2 className="text-xl font-bold text-primary tracking-wide font-display">Finance Tracker</h2>
       </div>
 
       {/* Off‑canvas menu overlay */}

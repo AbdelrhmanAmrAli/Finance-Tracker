@@ -49,22 +49,17 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <div className="flex flex-col justify-center items-center lg:items-start lg:w-2/3 h-full px-4 sm:px-6 lg:px-0 mx-auto">
-        <h3 className="text-xl lg:text-2xl font-semibold text-black">
-          Welcome back
-        </h3>
-        <p className="text-xs sm:text-sm text-slate-700 mt-1 mb-6">
-          Please enter your credentials
-        </p>
+      <div className="flex flex-col justify-center items-center lg:items-start lg:w-2/3 h-full px-4 sm:px-6 lg:px-0 mx-auto font-display">
+        <h3 className="text-2xl lg:text-3xl font-bold text-primary mb-2">Welcome back</h3>
+        <p className="text-xs sm:text-sm text-accent mb-6">Please enter your credentials</p>
 
-        <form onSubmit={handleLogin} className="w-full max-w-md">
+        <form onSubmit={handleLogin} className="w-full max-w-md space-y-4">
           <Input
             value={email}
             onChange={({ target: { value } }) => setEmail(value)}
             label="Email Address"
             placeholder="you@example.com"
             type="email"
-            className="mb-4"
           />
           <Input
             value={password}
@@ -72,24 +67,23 @@ const Login = () => {
             label="Password"
             placeholder="••••••••"
             type="password"
-            className="mb-4"
           />
 
           {error && (
-            <p className="text-red-500 text-xs sm:text-sm mt-1 mb-2">{error}</p>
+            <p className="text-danger text-xs sm:text-sm mt-1 mb-2 font-semibold">{error}</p>
           )}
 
           <button
             type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md mt-2 hover:bg-blue-400 transition-colors text-sm sm:text-base"
+            className="w-full bg-primary text-white py-2 rounded-xl mt-2 hover:bg-primary/90 transition-colors text-base font-bold shadow"
           >
             Login
           </button>
 
-          <p className="text-xs sm:text-sm text-slate-700 mt-4 text-center sm:text-left">
+          <p className="text-xs sm:text-sm text-accent mt-4 text-center sm:text-left">
             Don't have an account?
             <span
-              className="text-blue-500 ml-1 cursor-pointer"
+              className="text-primary ml-1 cursor-pointer font-semibold"
               onClick={() => navigate("/signup")}
             >
               Register

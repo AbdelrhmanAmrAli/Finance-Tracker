@@ -71,7 +71,7 @@ const Home = () => {
 
   return (
     <DashboardLayout activeMenu="Dashboard">
-      <div className="my-5 mx-auto p-4 max-w-7xl space-y-8 bg-bg-light text-gray-900">
+  <div className="my-5 mx-auto p-4 max-w-7xl space-y-8 bg-bg-light text-gray-900 font-display">
         {loading ? (
           <SkeletonTheme baseColor="#e2e8f0" highlightColor="#f0f4f8">
             {/* Skeleton loaders */}
@@ -113,21 +113,21 @@ const Home = () => {
               </div>
             </Suspense>
 
-            <div className="space-y-4">
-              <label htmlFor="currency" className="block font-medium">
+            <div className="space-y-2">
+              <label htmlFor="currency" className="block font-semibold text-primary">
                 Display Currency:
               </label>
               <select
                 id="currency"
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                className="border border-accent rounded p-2"
+                className="border border-accent rounded-xl p-2 font-display focus:border-primary focus:ring-2 focus:ring-primary"
               >
                 {["USD", "EUR", "EGP","GBP"].map((c) => (
                   <option key={c} value={c}>{c}</option>
                 ))}
               </select>
-              {fxError && <p className="text-danger">{fxError}</p>}
+              {fxError && <p className="text-danger font-semibold mt-1">{fxError}</p>}
             </div>
 
             <Suspense fallback={<Skeleton height={300} />}>

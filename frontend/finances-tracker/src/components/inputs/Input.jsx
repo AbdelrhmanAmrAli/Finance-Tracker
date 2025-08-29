@@ -16,7 +16,7 @@ const Input = ({
   return (
     <div className="space-y-1">
       {/* accessible label */}
-      <label htmlFor={id} className="block text-sm font-medium text-gray-700">
+      <label htmlFor={id} className="block text-sm font-semibold text-primary mb-1 font-display">
         {label}
       </label>
 
@@ -28,14 +28,7 @@ const Input = ({
           onChange={onChange}
           placeholder={placeholder}
           type={inputType}
-          className="
-            w-full rounded-md border border-gray-300 bg-transparent
-            py-2 pr-10 pl-3 text-sm text-gray-900 shadow-sm
-            focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none
-            appearance-none
-            [&::-webkit-inner-spin-button]:appearance-none
-            [&::-webkit-outer-spin-button]:appearance-none
-          "
+          className="w-full rounded-xl border border-accent bg-bg-light py-2 pr-10 pl-3 text-sm text-gray-900 shadow-sm focus:border-primary focus:ring-2 focus:ring-primary focus:outline-none font-display transition-all"
           /* aria-* makes screen-readers happy when input toggles */
           aria-describedby={isPassword ? `${id}-toggle` : undefined}
         />
@@ -46,7 +39,7 @@ const Input = ({
             id={`${id}-toggle`}
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-blue-600 focus:outline-none"
+            className="absolute inset-y-0 right-3 flex items-center text-accent hover:text-primary focus:outline-none"
             aria-label={showPassword ? "Hide password" : "Show password"}
           >
             {showPassword ? (

@@ -72,13 +72,9 @@ const SignUp = () => {
     <div>
       {/* Sign-up page component for user registration */}
       <AuthLayout>
-        <div className="flex flex-col justify-center w-full lg:max-w-lg px-6 sm:px-12 py-12 mx-auto">
-          <h3 className="text-xl sm:text-2xl font-semibold text-black">
-            Create an Account
-          </h3>
-          <p className="text-xs sm:text-sm text-slate-700 mt-1 mb-6">
-            Please enter your details to sign up
-          </p>
+        <div className="flex flex-col justify-center w-full lg:max-w-lg px-6 sm:px-12 py-12 mx-auto font-display">
+          <h3 className="text-2xl sm:text-3xl font-bold text-primary mb-2">Create an Account</h3>
+          <p className="text-xs sm:text-sm text-accent mb-6">Please enter your details to sign up</p>
 
           <form onSubmit={handleSignUp} className="space-y-4">
             <Input
@@ -111,21 +107,20 @@ const SignUp = () => {
             />
 
             {error && (
-              <p className="text-red-500 text-xs sm:text-sm mt-1">{error}</p>
+              <p className="text-danger text-xs sm:text-sm mt-1 font-semibold">{error}</p>
             )}
 
             <button
               type="submit"
-              className="w-full bg-blue-500 text-white py-2 rounded-md mt-2 
-                   hover:bg-blue-400 transition-colors text-sm sm:text-base"
+              className="w-full bg-primary text-white py-2 rounded-xl mt-2 hover:bg-primary/90 transition-colors text-base font-bold shadow"
             >
               Sign Up
             </button>
 
-            <p className="text-xs sm:text-sm text-slate-700 mt-4 text-center">
+            <p className="text-xs sm:text-sm text-accent mt-4 text-center">
               Already have an account?
               <span
-                className="text-blue-500 ml-1 cursor-pointer"
+                className="text-primary ml-1 cursor-pointer font-semibold"
                 onClick={() => navigate("/login")}
               >
                 Login

@@ -6,7 +6,7 @@ const AuthLayout = ({ children }) => {
     <div className="min-h-screen flex flex-col lg:flex-row">
       {/* Left (form) */}
       <div className="w-full lg:w-3/5 p-6 sm:p-12 flex flex-col justify-center">
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-primary mb-6">
           Finance Tracker
         </h2>
         {children}

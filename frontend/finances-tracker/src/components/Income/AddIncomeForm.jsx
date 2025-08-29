@@ -15,11 +15,11 @@ const AddIncomeForm = ({ onAddIncome }) => {
   const handleSubmit = () => onAddIncome(income);
 
   return (
-    <form className="space-y-4">
+  <form className="space-y-4 font-display">
       <div>
         <label
           htmlFor="income-source"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-semibold text-primary mb-1"
         >
           Income Source
         </label>
@@ -29,14 +29,13 @@ const AddIncomeForm = ({ onAddIncome }) => {
           onChange={({ target }) => handleChange("source", target.value)}
           placeholder="Freelance, Salary, etc"
           type="text"
-          className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
         />
       </div>
 
       <div>
         <label
           htmlFor="income-amount"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-semibold text-primary mb-1"
         >
           Amount
         </label>
@@ -46,17 +45,14 @@ const AddIncomeForm = ({ onAddIncome }) => {
           onChange={({ target }) => handleChange("amount", target.value)}
           type="number"
           placeholder="0.00"
-          className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2
-                     [appearance:textfield]
-                     [&::-webkit-inner-spin-button]:appearance-none
-                     [&::-webkit-outer-spin-button]:appearance-none"
+          className="[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
         />
       </div>
 
       <div>
         <label
           htmlFor="income-date"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-semibold text-primary mb-1"
         >
           Date
         </label>
@@ -65,7 +61,6 @@ const AddIncomeForm = ({ onAddIncome }) => {
           value={income.date}
           onChange={({ target }) => handleChange("date", target.value)}
           type="date"
-          className="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2"
         />
       </div>
 
@@ -73,7 +68,7 @@ const AddIncomeForm = ({ onAddIncome }) => {
         <button
           type="button"
           onClick={handleSubmit}
-          className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded transition-colors"
+          className="bg-success hover:bg-success/90 text-white font-bold py-2 px-6 rounded-xl transition-colors font-display shadow"
         >
           Add Income
         </button>

@@ -89,11 +89,11 @@ const Income = () => {
 
   return (
     <DashboardLayout activeMenu="income">
-      <div className="max-w-4xl mx-auto my-6 px-4 space-y-6">
+      <div className="max-w-4xl mx-auto my-6 px-4 space-y-6 font-display">
         <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:gap-4">
           <label
             htmlFor="currency"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-semibold text-primary"
           >
             Display Currency:
           </label>
@@ -101,7 +101,7 @@ const Income = () => {
             id="currency"
             value={currency}
             onChange={(e) => setCurrency(e.target.value)}
-            className="border rounded p-2"
+            className="border border-accent rounded-xl p-2 font-display focus:border-primary focus:ring-2 focus:ring-primary"
           >
             {["USD", "EUR", "EGP"].map((c) => (
               <option key={c} value={c}>

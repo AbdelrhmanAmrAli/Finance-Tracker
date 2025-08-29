@@ -17,12 +17,12 @@ const AddExpenseForm = ({ onAddExpense }) => {
   };
 
   return (
-    <form className="space-y-4">
+  <form className="space-y-4 font-display">
       {/* Description */}
       <div>
         <label
           htmlFor="expense-description"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-semibold text-primary mb-1"
         >
           Expense Description
         </label>
@@ -39,7 +39,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
       <div>
         <label
           htmlFor="expense-amount"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-semibold text-primary mb-1"
         >
           Amount
         </label>
@@ -49,11 +49,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
           onChange={(e) => handleChange("amount", e.target.value)}
           placeholder="0.00"
           type="number"
-          className="
-            [appearance:textfield]
-            [&::-webkit-inner-spin-button]:appearance-none
-            [&::-webkit-outer-spin-button]:appearance-none
-          "
+          className="[appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
         />
       </div>
 
@@ -61,7 +57,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
       <div>
         <label
           htmlFor="expense-date"
-          className="block text-sm font-medium text-gray-700 mb-1"
+          className="block text-sm font-semibold text-primary mb-1"
         >
           Date
         </label>
@@ -78,10 +74,7 @@ const AddExpenseForm = ({ onAddExpense }) => {
         <button
           type="button"
           onClick={handleSubmit}
-          className="
-            bg-red-500 hover:bg-red-600 text-white font-medium
-            py-2 px-4 rounded transition-colors
-          "
+          className="bg-danger hover:bg-danger/90 text-white font-bold py-2 px-6 rounded-xl transition-colors font-display shadow"
         >
           Add Expense
         </button>
